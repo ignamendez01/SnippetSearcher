@@ -27,6 +27,7 @@ public class SnippetService {
         snippetRepository.findById(id).ifPresent(s -> {
             s.setName(snippet.getName());
             s.setDescription(snippet.getDescription());
+            s.setAuthor(snippet.getAuthor());
             s.setCode(snippet.getCode());
             s.setLanguage(snippet.getLanguage());
             s.setVersion(snippet.getVersion());
@@ -36,5 +37,12 @@ public class SnippetService {
 
     public void deleteSnippet(Long id) {
         snippetRepository.deleteById(id);
+    }
+
+    public void shareSnippet(Long id, String username) {
+        snippetRepository.findById(id).ifPresent(snippet -> {
+            snippet.getSharedUsers().add(username);
+            snippetRepository.save(snippet);
+        });
     }
 }

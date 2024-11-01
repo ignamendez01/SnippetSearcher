@@ -1,6 +1,8 @@
 package com.snippetSearcher.SnippetSearcher.Snippets;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Snippets")
@@ -15,6 +17,9 @@ public class Snippet {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "author")
+    private String author;
+
     @Column(name = "code")
     private String code;
 
@@ -24,6 +29,11 @@ public class Snippet {
     @Column(name = "version")
     private String version;
 
+    @ElementCollection
+    @Column(name = "shared_users")
+    private List<String> sharedUsers = new ArrayList<>();
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -36,16 +46,16 @@ public class Snippet {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getCode() {
@@ -68,7 +78,20 @@ public class Snippet {
         return version;
     }
 
-    public void setVersion(String version){
+    public void setVersion(String version) {
         this.version = version;
     }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public List<String> getSharedUsers() {
+        return sharedUsers;
+    }
 }
+
