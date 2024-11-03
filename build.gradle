@@ -34,11 +34,6 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	implementation 'printscript:interpreter:2.1.4'
-	implementation 'printscript:parser:2.1.4'
-	implementation 'printscript:ast:2.1.4'
-	implementation 'printscript:lexer:2.1.4'
-	implementation 'printscript:token:2.1.4'
 }
 
 tasks.named('test') {

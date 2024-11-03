@@ -5,6 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +32,26 @@ public class SnippetController {
     @PostMapping("/add")
     public void addSnippet(@RequestBody Snippet snippet) {
         snippetService.addSnippet(snippet);
+    }
+
+    @PostMapping("/addFromFile")
+    public ResponseEntity<String> createSnippetFromFile(@RequestBody SnippetRequest snippetRequest) {
+        try {
+            String code = new String(Files.readAllBytes(Paths.get(snippetRequest.getFilePath())), StandardCharsets.UTF_8);
+
+            Snippet newSnippet = new Snippet();
+            newSnippet.setName(snippetRequest.getName());
+            newSnippet.setDescription(snippetRequest.getDescription());
+            newSnippet.setAuthor(snippetRequest.getAuthor());
+            newSnippet.setLanguage(snippetRequest.getLanguage());
+            newSnippet.setVersion(snippetRequest.getVersion());
+            newSnippet.setCode(code);
+
+            snippetService.addSnippet(newSnippet);
+            return ResponseEntity.ok("Snippet created successfully");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error reading file: " + e.getMessage());
+        }
     }
 
     @PutMapping("/update/{id}")
