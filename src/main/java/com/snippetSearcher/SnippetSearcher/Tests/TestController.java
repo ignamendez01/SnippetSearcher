@@ -39,7 +39,6 @@ public class TestController {
 
     @GetMapping("/execute/{id}")
     public void executeTest(@PathVariable Long id) {
-
     }
 }
 

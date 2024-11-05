@@ -37,8 +37,7 @@ public class SnippetController {
     @PostMapping("/addFromFile")
     public ResponseEntity<String> createSnippetFromFile(@RequestBody SnippetRequest snippetRequest) {
         try {
-            String code = new String(Files.readAllBytes(Paths.get(snippetRequest.getFilePath())), StandardCharsets.UTF_8);
-
+            String code = Files.readString(Paths.get(snippetRequest.getFilePath()));
             Snippet newSnippet = new Snippet();
             newSnippet.setName(snippetRequest.getName());
             newSnippet.setDescription(snippetRequest.getDescription());

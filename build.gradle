@@ -9,20 +9,18 @@ version = '0.0.1-SNAPSHOT'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
 
 repositories {
-	mavenLocal()
 	mavenCentral()
-
 	maven {
 		name = "GitHubPackages"
 		url = uri("https://maven.pkg.github.com/ignamendez01/printscript")
 		credentials {
-			username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-			password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+			username = "ignamendez01"
+			password = "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"
 		}
 	}
 }
@@ -34,6 +32,11 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'printscript:interpreter:2.1.5'
+	implementation 'printscript:parser:2.1.5'
+	implementation 'printscript:ast:2.1.5'
+	implementation 'printscript:lexer:2.1.5'
+	implementation 'printscript:token:2.1.5'
 }
 
 tasks.named('test') {

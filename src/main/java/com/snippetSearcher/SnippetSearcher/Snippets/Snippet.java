@@ -30,7 +30,8 @@ public class Snippet {
     private String version;
 
     @ElementCollection
-    @Column(name = "shared_users")
+    @CollectionTable(name = "shared_users", joinColumns = @JoinColumn(name = "snippet_id"))
+    @Column(name = "username")
     private List<String> sharedUsers = new ArrayList<>();
 
     // Getters and Setters
