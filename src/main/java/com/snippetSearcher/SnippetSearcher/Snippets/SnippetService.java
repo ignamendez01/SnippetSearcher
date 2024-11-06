@@ -25,12 +25,24 @@ public class SnippetService {
 
     public void updateSnippet(Long id, Snippet snippet) {
         snippetRepository.findById(id).ifPresent(s -> {
-            s.setName(snippet.getName());
-            s.setDescription(snippet.getDescription());
-            s.setAuthor(snippet.getAuthor());
-            s.setCode(snippet.getCode());
-            s.setLanguage(snippet.getLanguage());
-            s.setVersion(snippet.getVersion());
+            if (snippet.getName() != null) {
+                s.setName(snippet.getName());
+            }
+            if (snippet.getDescription() != null) {
+                s.setDescription(snippet.getDescription());
+            }
+            if (snippet.getAuthor() != null) {
+                s.setAuthor(snippet.getAuthor());
+            }
+            if (snippet.getCode() != null) {
+                s.setCode(snippet.getCode());
+            }
+            if (snippet.getLanguage() != null) {
+                s.setLanguage(snippet.getLanguage());
+            }
+            if (snippet.getVersion() != null) {
+                s.setVersion(snippet.getVersion());
+            }
             snippetRepository.save(s);
         });
     }
