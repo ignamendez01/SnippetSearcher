@@ -24,9 +24,15 @@ public class TestService {
 
     public void updateTest(Long id, Test test) {
         testRepository.findById(id).ifPresent(t -> {
-            t.setSnippetId(test.getSnippetId());
-            t.setInputs(test.getInputs());
-            t.setOutputs(test.getOutputs());
+            if (test.getSnippetId() != null) {
+                t.setSnippetId(test.getSnippetId());
+            }
+            if (test.getInputs() != null) {
+                t.setInputs(test.getInputs());
+            }
+            if (test.getOutputs() != null) {
+                t.setOutputs(test.getOutputs());
+            }
             testRepository.save(t);
         });
     }

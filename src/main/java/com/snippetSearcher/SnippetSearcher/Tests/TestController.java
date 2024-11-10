@@ -1,6 +1,7 @@
 package com.snippetSearcher.SnippetSearcher.Tests;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,18 +24,21 @@ public class TestController {
     }
 
     @PostMapping("/add")
-    public void addTest(@RequestBody Test test) {
+    public ResponseEntity<String> addTest(@RequestBody Test test) {
         testService.addTest(test);
+        return ResponseEntity.ok("Test created successfully");
     }
 
     @PutMapping("/update/{id}")
-    public void updateTest(@PathVariable Long id, @RequestBody Test test) {
+    public ResponseEntity<String> updateTest(@PathVariable Long id, @RequestBody Test test) {
         testService.updateTest(id, test);
+        return ResponseEntity.ok("Test updated successfully");
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteTest(@PathVariable Long id) {
+    public ResponseEntity<String> deleteTest(@PathVariable Long id) {
         testService.deleteTest(id);
+        return ResponseEntity.ok("Test deleted");
     }
 
     @GetMapping("/execute/{id}")

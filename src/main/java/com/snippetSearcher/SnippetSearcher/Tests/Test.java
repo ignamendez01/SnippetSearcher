@@ -19,12 +19,6 @@ public class Test {
     @ElementCollection
     private List<String> outputs;
 
-    // Getters y Setters
-
-    public Long getId() {
-        return id;
-    }
-
     public Long getSnippetId() {
         return snippetId;
     }
@@ -35,10 +29,6 @@ public class Test {
 
     public List<String> getOutputs() {
         return outputs;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setSnippetId(Long snippetId) {

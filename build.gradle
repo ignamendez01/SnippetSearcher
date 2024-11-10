@@ -13,14 +13,17 @@ java {
 	}
 }
 
+def props = new Properties()
+file (".env").withInputStream { props.load(it)}
+
 repositories {
 	mavenCentral()
 	maven {
 		name = "GitHubPackages"
 		url = uri("https://maven.pkg.github.com/ignamendez01/printscript")
 		credentials {
-			username = "ignamendez01"
-			password = "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"
+			username = project.findProperty("gpr.user") ?: props.getProperty("USER")
+			password = project.findProperty("gpr.key") ?: props.getProperty("TOKEN")
 		}
 	}
 }
