@@ -14,7 +14,7 @@ java {
 }
 
 def props = new Properties()
-file (".env").withInputStream { props.load(it)}
+file(".env").withInputStream { props.load(it) }
 
 repositories {
 	mavenCentral()
@@ -22,8 +22,8 @@ repositories {
 		name = "GitHubPackages"
 		url = uri("https://maven.pkg.github.com/ignamendez01/printscript")
 		credentials {
-			username = project.findProperty("gpr.user") ?: props.getProperty("USER")
-			password = project.findProperty("gpr.key") ?: props.getProperty("TOKEN")
+			username = props.getProperty("USER")
+			password = props.getProperty("TOKEN")
 		}
 	}
 }

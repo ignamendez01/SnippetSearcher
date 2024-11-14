@@ -19,6 +19,10 @@ public class Test {
     @ElementCollection
     private List<String> outputs;
 
+    public Long getId() {
+        return id;
+    }
+
     public Long getSnippetId() {
         return snippetId;
     }
