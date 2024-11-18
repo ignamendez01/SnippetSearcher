@@ -34,6 +34,10 @@ public class Snippet {
     @Column(name = "username")
     private List<String> sharedUsers = new ArrayList<>();
 
+    public Long getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }

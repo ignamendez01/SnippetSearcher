@@ -11,6 +11,8 @@ services:
       - DATABASE_URL=jdbc:postgresql://java_db:5432/postgres
       - DATABASE_USERNAME=postgres
       - DATABASE_PASSWORD=postgres
+      - NEW_RELIC_LICENSE_KEY=ff270710a107fe600111542edcd8c094FFFFNRAL
+      - NEW_RELIC_APP_NAME=SnippetSearcher
     depends_on:
       - java_db
 
