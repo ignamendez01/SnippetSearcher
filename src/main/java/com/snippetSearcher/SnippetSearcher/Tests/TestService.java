@@ -94,10 +94,6 @@ public class TestService {
         );
     }
 
-    public List<Test> getTestsBySnippetId(Long snippetId) {
-        return testRepository.findTestsBySnippetId(snippetId);
-    }
-
     public String executeTest(Test test, Snippet s) throws Exception {
         Interpreter interpreter = InterpreterFactory.interpreterVersion(new Administrator(), s.getVersion());
         Parser parser = ParserFactory.parserVersion(s.getVersion());
@@ -123,12 +119,18 @@ public class TestService {
                     outputMessages.append(result).append("\n");
                 }
             }
+            logger.info("Test executed");
             outputMessages.append("Test successfully executed");
             return outputMessages.toString();
 
         } else {
+            logger.error("test failed");
             throw new Exception(((ErrorResponse) response).message());
         }
+    }
+
+    public List<Test> getTestsBySnippetId(Long snippetId) {
+        return testRepository.findTestsBySnippetId(snippetId);
     }
 }
 
