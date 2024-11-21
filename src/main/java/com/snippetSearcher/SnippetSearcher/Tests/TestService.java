@@ -30,8 +30,14 @@ public class TestService {
     private TestRepository testRepository;
 
     public List<Test> getAllTests() {
-        logger.info("Full list of tests");
-        return testRepository.findAll();
+        List<Test> tests = testRepository.findAll();
+        if (tests.isEmpty()){
+            logger.error("List is empty");
+            throw new EntityNotFoundException();
+        }else{
+            logger.info("Full list of tests");
+            return tests;
+        }
     }
 
     public Test getTestById(Long id) {

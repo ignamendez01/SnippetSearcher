@@ -20,8 +20,14 @@ public class TestController {
     private SnippetService snippetService;
 
     @GetMapping("/getAll")
-    public List<Test> getAllTests() {
-        return testService.getAllTests();
+    public ResponseEntity<?> getAllTests() {
+        try {
+            List<Test> tests = testService.getAllTests();
+            return ResponseEntity.ok(tests);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("There are no tests");
+        }
     }
 
     @GetMapping("/get/{id}")

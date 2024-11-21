@@ -1,5 +1,6 @@
 package com.snippetSearcher.SnippetSearcher.Snippets;
 
+import com.snippetSearcher.SnippetSearcher.Tests.Test;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +18,14 @@ public class SnippetService {
     private SnippetRepository snippetRepository;
 
     public List<Snippet> getAllSnippets() {
-        logger.info("Full list of snippets");
-        return snippetRepository.findAll();
+        List<Snippet> snippets = snippetRepository.findAll();
+        if (snippets.isEmpty()){
+            logger.error("List is empty");
+            throw new EntityNotFoundException();
+        }else{
+            logger.info("Full list of snippets");
+            return snippets;
+        }
     }
 
     public Snippet getSnippetById(Long id) {

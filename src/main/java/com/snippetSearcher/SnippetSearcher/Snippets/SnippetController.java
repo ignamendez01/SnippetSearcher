@@ -28,8 +28,14 @@ public class SnippetController {
     private TestController testController;
 
     @GetMapping("/getAll")
-    public List<Snippet> getAllSnippets() {
-        return snippetService.getAllSnippets();
+    public ResponseEntity<?> getAllSnippets() {
+        try {
+            List<Snippet> snippets = snippetService.getAllSnippets();
+            return ResponseEntity.ok(snippets);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("There are no snippets");
+        }
     }
 
     @GetMapping("/get/{id}")
