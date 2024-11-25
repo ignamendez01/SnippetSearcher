@@ -36,11 +36,11 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation("org.springframework.boot:spring-boot-starter-logging")
-	implementation 'printscript:interpreter:2.1.5'
-	implementation 'printscript:parser:2.1.5'
-	implementation 'printscript:ast:2.1.5'
-	implementation 'printscript:lexer:2.1.5'
-	implementation 'printscript:token:2.1.5'
+	implementation 'printscript:interpreter:2.2.1'
+	implementation 'printscript:parser:2.2.1'
+	implementation 'printscript:ast:2.2.1'
+	implementation 'printscript:lexer:2.2.1'
+	implementation 'printscript:token:2.2.1'
 }
 
 tasks.named('test') {

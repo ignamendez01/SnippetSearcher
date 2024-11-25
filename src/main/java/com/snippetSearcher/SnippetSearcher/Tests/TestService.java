@@ -111,27 +111,31 @@ public class TestService {
 
         StringBuilder outputMessages = new StringBuilder();
         InputStream stream = new ByteArrayInputStream(s.getCode().getBytes());
-        InterpreterResponse response = interpreter.interpretAST(parser.generateAST(lexer.makeTokens(stream)));
 
-        if (response instanceof SuccessResponse) {
-            for (int i = 0; i < test.getOutputs().size(); i++) {
-                String result = interpreter.getAdmin().getPrintedElements().poll();
+        try {
+            InterpreterResponse response = interpreter.interpretAST(parser.generateAST(lexer.makeTokens(stream)));
+            if (response instanceof SuccessResponse) {
+                for (int i = 0; i < test.getOutputs().size(); i++) {
+                    String result = interpreter.getAdmin().getPrintedElements().poll();
 
-                if (!Objects.equals(test.getOutputs().get(i), result)) {
-                    String errorMessage = "Mismatch in output: " + result + " instead of " + test.getOutputs().get(i);
-                    outputMessages.append(errorMessage);
-                    throw new Exception(outputMessages.toString());
-                } else {
-                    outputMessages.append(result).append("\n");
+                    if (!Objects.equals(test.getOutputs().get(i), result)) {
+                        String errorMessage = "Mismatch in output: " + result + " instead of " + test.getOutputs().get(i);
+                        outputMessages.append(errorMessage);
+                        throw new Exception(outputMessages.toString());
+                    } else {
+                        outputMessages.append(result).append("\n");
+                    }
                 }
-            }
-            logger.info("Test executed");
-            outputMessages.append("Test successfully executed");
-            return outputMessages.toString();
+                logger.info("Test executed");
+                outputMessages.append("Test successfully executed");
+                return outputMessages.toString();
 
-        } else {
-            logger.error("test failed");
-            throw new Exception(((ErrorResponse) response).message());
+            } else {
+                throw new Exception(((ErrorResponse) response).message());
+            }
+        } catch (Exception e) {
+            logger.error("Test failed");
+            throw new Exception(e.getMessage());
         }
     }
 
